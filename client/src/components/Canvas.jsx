@@ -12,9 +12,13 @@ const Canvas = observer(() => {
         toolState.setTool(new Brush(canvasRef.current));
     }, [])
 
+    const saveToUndoHandler = () => {
+        canvasState.pushToUndo(canvasRef.current.toDataURL());
+    }
+
     return (
         <div className='canvas'>
-            <canvas ref={canvasRef} width={1000} height={700}/>
+            <canvas onMouseDown={saveToUndoHandler} ref={canvasRef} width={1000} height={700}/>
         </div>
     );
 });
