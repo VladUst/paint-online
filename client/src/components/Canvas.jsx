@@ -9,6 +9,9 @@ import Brush from "../tools/Brush";
 import {useParams} from "react-router-dom";
 import Rect from "../tools/Rect";
 import axios from 'axios';
+import Eraser from "../tools/Eraser";
+import Line from "../tools/Line";
+import Circle from "../tools/Circle";
 const Canvas = observer(() => {
     const canvasRef = useRef();
     const usernameRef = useRef();
@@ -64,8 +67,17 @@ const Canvas = observer(() => {
             case 'brush':
                 Brush.draw(ctx, figure.x, figure.y);
                 break;
+            case 'eraser':
+                Eraser.draw(ctx, figure.x, figure.y);
+                break;
             case 'rect':
                 Rect.staticDraw(ctx, figure.x, figure.y, figure.width, figure.height, figure.color);
+                break;
+            case 'line':
+                Line.staticDraw(ctx, figure.startX, figure.startY, figure.x, figure.y, figure.color);
+                break;
+            case 'circle':
+                Circle.staticDraw(ctx, figure.x, figure.y, figure.r, figure.color);
                 break;
             case 'finish':
                 ctx.beginPath();
